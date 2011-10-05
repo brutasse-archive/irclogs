@@ -1,0 +1,5 @@
+.sass-cache
+dist
+irclogs.egg-info
+irclogs/settings.py
+irclogs/logs.sqlite

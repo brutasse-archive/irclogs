@@ -1,0 +1,13 @@
+body {
+	font-family: Georgia, Times, serif;
+
+	.content {
+		margin-bottom: 1em;
+	}
+}
+@include sticky-footer(65px, '.wrapper', '.push', '.footer');
+
+#datefield {
+	padding: 0 5px;
+	&:hover { cursor: pointer; }
+}

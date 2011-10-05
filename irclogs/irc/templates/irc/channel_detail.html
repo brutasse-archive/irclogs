@@ -1,0 +1,73 @@
+{% extends "irc/channel_list.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans "Channels" %}{% endblock %}
+
+{% block frame %}
+	{% if not events %}
+		<h2 class="date">
+			{% if before %}
+				<a href="?date={{ before|date:"Y-m-d" }}">&lsaquo;</a>
+			{% endif %}
+			<span id="datefield">{{ date|date:"Y-m-d" }}</span>
+			{% if after %}
+				<a href="?date={{ after|date:"Y-m-d" }}">&rsaquo;</a>
+			{% endif %}
+		</h2>
+	{% endif %}
+	{% spaceless %}
+		{% for event in events %}
+			{% ifchanged event.timestamp.day %}
+				<h2 class="date">
+					{% if before %}
+						<a href="?date={{ before|date:"Y-m-d" }}">&lsaquo;</a>
+					{% endif %}
+					<span id="datefield">{{ event.timestamp|date:"Y-m-d" }}</span>
+					{% if after %}
+						<a href="?date={{ after|date:"Y-m-d" }}">&rsaquo;</a>
+					{% endif %}
+				</h2>
+			{% endifchanged %}
+			{% ifchanged event.timestamp.minute %}
+				{% if event.event_type == event.CHAT or event.event_type == event.ME %}
+					<div class="nick date">&nbsp;</div>
+					<div class="chat date"><span class="date">{{ event.timestamp|date:"H:i" }}</span></div>
+				{% endif %}
+			{% endifchanged %}
+			{% if event.event_type == event.CHAT %}
+				<div class="nick">{{ event.nickname }}</div>
+				<div class="chat">{{ event.content|urlize }}</div>
+			{% endif %}
+			{% if event.event_type == event.ME %}
+				<div class="nick">*</div>
+				<div class="chat">{{ event.nickname }} {{ event.content|urlize }}</div>
+			{% endif %}
+		{% endfor %}
+	{% endspaceless %}
+{% endblock %} 
+
+{% block extracontent %}{{ block.super }}
+	<script type="text/javascript" src="{% static "irc/js/prototype.js" %}"></script>
+	<script type="text/javascript" src="{% static "irc/js/calendarview.js" %}"></script>
+	<script type="text/javascript">
+		function prependZero(num) {
+			num = num.toString();
+			if (num.length == 1)
+				num = '0' + num;
+			return num;
+		}
+
+		window.onload = function() {
+			Calendar.setup({
+				dateField: 'datefield',
+				triggerElement: 'datefield',
+				closeHandler: function(klass) {
+					qs = klass.date.getFullYear() + '-' + prependZero(klass.date.getMonth() + 1) +  '-' + prependZero(klass.date.getDate());
+					href = window.location.href.split('?')[0];
+					href += '?date=' + qs;
+					window.location.href = href;
+				}
+			});
+		}
+	</script>
+{% endblock %}

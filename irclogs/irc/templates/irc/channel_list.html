@@ -1,0 +1,25 @@
+{% extends "irc/base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{% trans "Channels" %}{% endblock %}
+
+{% block content %}
+	<h1>
+		{% if object %}
+			{{ object }}
+		{% else %}
+			{% trans "Channels" %}
+		{% endif %}
+	</h1>
+	<ul class="channels">{% spaceless %}
+		{% for channel in channels %}
+			{% if channel.is_public or user.is_superuser %}
+				<li{% if channel == object %} class="selected"{% endif %}><a href="{{ channel.get_absolute_url }}">{{ channel }}</a></li>
+			{% endif %}
+		{% endfor %}
+	{% endspaceless %}</ul>
+	<div class="frame">
+		{% block frame %}{% endblock %}
+	</div>
+{% endblock %} 

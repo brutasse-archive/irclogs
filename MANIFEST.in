@@ -1,0 +1,6 @@
+include README.rst requirements.txt
+recursive-include irclogs/templates *
+recursive-include irclogs/irc/templates *
+recursive-include irclogs/irc/static *
+recursive-exclude irclogs *.pyc
+recursive-exclude irclogs *.scss

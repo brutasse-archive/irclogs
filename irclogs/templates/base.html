@@ -1,0 +1,24 @@
+<!doctype html>
+<html xml:lang="en" lang="en">
+	<head>
+		<title>{% block title %}IRC Logs{% endblock %}</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}irc/css/screen.css">
+		{% block extrahead %}{% endblock %}
+	</head>
+	<body id="{% block bodyid %}default{% endblock %}">
+		<div class="wrapper">
+			<div class="content">
+				{% block content %}{% endblock %}
+				{% block extracontent %}{% endblock %}
+			</div>
+			<div class="push"></div>
+		</div>
+		<div class="footer">
+			<p>
+				Copyright 2011, Bruno Renié.
+			</p>
+		</div>
+	</body>
+</html>

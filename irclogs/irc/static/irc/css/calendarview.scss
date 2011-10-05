@@ -1,0 +1,67 @@
+div.calendar {
+	font-size: smaller;
+	color: #000;
+
+	&.popup {
+		margin-left: -21px;
+		margin-top: 30px;
+	}
+
+	table {
+		background-color: #eee;
+		border: 1px solid #aaa;
+		border-collapse: collapse;
+	}
+
+	thead {
+		background-color: white;
+	}
+
+	td, th {
+		padding: 3px;
+		text-align: center;
+	}
+
+	td.title {
+		font-weight: bold;
+	}
+
+	th {
+		background: #ddd;
+		border-bottom: 1px solid #ccc;
+		border-top: 1px solid #ccc;
+		font-weight: bold;
+		color: #555;
+	}
+
+	tr.days td {
+		width: 2em;
+		color: #555;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	tr.days td:hover, td.button:hover {
+		background-color: #34ABFA;
+		cursor: pointer;
+	}
+
+	tr.days td:active, td.button:active {
+		background-color: #cde;
+	}
+
+	tr.days td.selected {
+		font-weight: bold;
+		background-color: #fff;
+		color: #000;
+	}
+
+	tr.days td.today {
+		font-weight: bold;
+		color: #D50000;
+	}
+
+	tr.days td.otherDay {
+		color: #bbb;
+	}
+}
